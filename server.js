@@ -1,12 +1,35 @@
-var qr = require('qr-image');  
-var express = require('express');
+'use strict';
+/**
+ * Module dependencies.
+ */
+var init = require('./config/init')(),
+	config = require('./config/config'),
+	mongoose = require('mongoose');
 
-var app = express();
+/**
+ * Main application entry file.
+ * Please note that the order of loading is important.
+ */
 
-app.get('/', function(req, res) {  
-  var code = qr.image('http://www.fansworld.tv', { type: 'svg' });
-  res.type('svg');
-  code.pipe(res);
+// Bootstrap db connection
+var db = mongoose.connect(config.db, function(err) {
+	if (err) {
+		console.error('\x1b[31m', 'Could not connect to MongoDB!');
+		console.log(err);
+	}
 });
 
-app.listen(3000);
+// Init the express application
+var app = require('./config/express')(db);
+
+// Bootstrap passport config
+require('./config/passport')();
+
+// Start the app by listening on <port>
+app.listen(config.port);
+
+// Expose app
+exports = module.exports = app;
+
+// Logging initialization
+console.log('MEAN.JS application started on port ' + config.port);
