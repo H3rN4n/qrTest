@@ -12,7 +12,7 @@ exports.index = function(req, res) {
 };
 
 exports.qr = function(req, res) {
-  var code = qr.image('http://www.google.com', { type: 'svg' });
+  var code = qr.image(req.query.text, { type: 'svg' });
   res.type('svg');
   code.pipe(res);
 };
