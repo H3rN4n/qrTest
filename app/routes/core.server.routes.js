@@ -1,11 +1,10 @@
 'use strict';
 
 module.exports = function(app) {
-	// Root routing
-	var core = require('../../app/controllers/core');
-	app.route('/').get(core.index);
+  var core = require('../../app/controllers/core');
 
-	// QR routing
-	var core = require('../../app/controllers/core');
-	app.route('/qr').get(core.qr);
+  // Root routing
+  app.route('/').get(core.index);
+  // QR routing
+  app.route('/qr').get(core.qr);
 };
