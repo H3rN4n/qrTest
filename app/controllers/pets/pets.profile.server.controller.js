@@ -3,15 +3,16 @@
 /**
  * Module dependencies.
  */
-var _ = require('lodash'),
-	errorHandler = require('../errors'),
-	mongoose = require('mongoose'),
-	Pet = mongoose.model('Pet');
+ var _ = require('lodash'),
+ qr = require('qr-image'),
+ errorHandler = require('../errors'),
+ mongoose = require('mongoose'),
+ Pet = mongoose.model('Pet');
 
 /**
  * Update pet details
  */
-exports.update = function(req, res) {
+ exports.update = function(req, res) {
 	// Init Variables
 	var pet = req.pet;
 	var message = null;
@@ -50,6 +51,12 @@ exports.update = function(req, res) {
 /**
  * Send Pet
  */
-exports.me = function(req, res) {
-	res.jsonp(req.pet || null);
-};
+ exports.me = function(req, res) {
+ 	res.jsonp(req.pet || null);
+ };
+
+ exports.qr = function(req, res) {
+ 	var code = qr.image(req.param('url'), { type: 'svg' });
+ 	res.type('svg');
+ 	code.pipe(res);
+ };
