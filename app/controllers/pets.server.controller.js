@@ -3,18 +3,11 @@
 /**
  * Module dependencies.
  */
-var _ = require('lodash');
-var qr = require('qr-image');
+ var _ = require('lodash');
 /**
  * Extend user's controller
  */
-module.exports = _.extend(
-	require('./users/users.authorization'),
-	require('./users/users.profile')
-);
-
-exports.qr = function(req, res) {
-  var code = qr.image('http://www.google.com', { type: 'svg' });
-  res.type('svg');
-  code.pipe(res);
-};
+ module.exports = _.extend(
+ 	require('./pets/pets.authorization'),
+ 	require('./pets/pets.profile')
+ 	);
