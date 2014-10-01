@@ -14,7 +14,7 @@ var PetSchema = new Schema({
 		type: Date,
 		default: Date.now
 	},
-	ownwerId: {
+/*	ownwerId: {
 		type: Number,
 		default: '',
 		trim: true,
@@ -25,7 +25,7 @@ var PetSchema = new Schema({
 		unique: 'testing error message',
 		required: 'Please fill in a username',
 		trim: true
-	},
+	},*/
 	general: {
 		name: {
 			type: String,
@@ -88,22 +88,19 @@ var PetSchema = new Schema({
 		facebook: {
 			type: String,
 			default: '',
-			trim: true,
-			required: 'Facebook cannot be blank'
+			trim: true
 		},
 		twitter: {
 			type: String,
 			default: '',
-			trim: true,
-			required: 'Twitter cannot be blank'
+			trim: true
 		},
 	},
 	veterinarian: {
 		vet: {
 			type: String,
 			default: '',
-			trim: true,
-			required: 'Vet cannot be blank'
+			trim: true
 		},
 		phone: {
 			type: Number,
@@ -133,10 +130,14 @@ var PetSchema = new Schema({
 			trim: true
 		},
 		allergies: {
-
+			type: String,
+			default: '',
+			trim: true
 		},
 		comments:{
-
+			type: String,
+			default: '',
+			trim: true
 		}
 	},
 	vaccination: {
@@ -157,9 +158,9 @@ var PetSchema = new Schema({
 			trim: true
 		}
 	},
-	pet: {
+	user: {
 		type: Schema.ObjectId,
-		ref: 'Pet'
+		ref: 'User'
 	}
 });
 
