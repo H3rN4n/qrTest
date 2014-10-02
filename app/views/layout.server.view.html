@@ -31,18 +31,72 @@
 
 	<!-- Fav Icon -->
 	<link href="/modules/core/img/brand/favicon.ico" rel="shortcut icon" type="image/x-icon">
-
+	
 	<!--Application CSS Files-->
 	{% for cssFile in cssFiles %}<link rel="stylesheet" href="{{cssFile}}">
 	{% endfor %}
+	
+	<style>
+	.pet-id-container {
+		width: 600px;
+		margin: auto;
+		height: 240px;
+		border: 3px solid black;
+		border-radius: 20px;
+		background-color: #343434;
+		padding: 20px;
+	}
+	.pet-id-container #qr {
+		float: left;
+		width: 200px;
+	}
+	.pet-id-container #qr svg {
+		width: 200px;
+		height: 200px;
+		color: #fff;
+  		fill: currentColor;
+	}
+	.pet-id-container .pet-info {
+		float: left;
+		width: 250px;
+		margin-left: 20px;
+		color: white;
+	}
 
+	.pet-id-container .pet-info span {
+		display: block;
+		width: 100%;
+		font-size: 24px;
+	}
+	.cutplace {
+		height: 200px;
+		width: 20px;
+		border: 3px solid black;
+		border-radius: 10px;
+		float: left;
+		margin: 0 10px;
+		background-color: white;
+	}
+	</style>
 	<!-- HTML5 Shim -->
 	<!--[if lt IE 9]>
 		<script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
 		<![endif]-->
 	</head>
-
+	
 	<body class="ng-cloak">
+		<br><br><br><br><br>
+		<div class="pet-id-container">
+			<div class="cutplace"></div>
+			<div id="qr"></div>
+			<div class="pet-info">
+				<span class="petname">Nombre: Pombo</span>
+				<span class="petid">Perfil: petid.com/pombo</span>
+				<span class="owner-phone">Cel: 11 2457 0900</span>
+			</div>
+			<div class="cutplace"></div>
+		</div>
+
 		<header data-ng-include="'/modules/core/views/header.client.view.html'" class="navbar navbar-fixed-top navbar-inverse"></header>
 		<section class="content">
 			<section class="container">
@@ -63,27 +117,41 @@
 		{% if process.env.NODE_ENV === 'development' %}
 		<!--Livereload script rendered -->
 		<script type="text/javascript" src="http://localhost:35729/livereload.js"></script>
+		{% endif %}
+		
 		<script type="text/javascript" src="https://code.jquery.com/jquery-1.11.1.min.js"></script>
 		<script>
 		var qrController = {
 			init: function(){
 				this.getQR();
 			},
+			params: {
+				currentUrl: document.location.href
+			},
 			getQR: function(){
+
+				var self = this;
+
 				$.ajax({
 					url: '/qr',
 					type: 'GET',
-					content: 'html',
-					data: { url: 'http://fansworld.tv' },
-					params: {}
-				}).done(function(data){
+					dataType: 'html',
+					data: {url: self.params.currentUrl},
+				})
+				.done(function(data) {
+					console.log("success");
 					$('#qr').html(data);
+				})
+				.fail(function() {
+					console.log("error");
+				})
+				.always(function() {
+					console.log("complete");
 				});
 			}
 		}
 		qrController.init();
 		</script>
-		{% endif %}
 	</body>
 
 	</html>
