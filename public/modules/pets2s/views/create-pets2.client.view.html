@@ -5,149 +5,170 @@
     <div class="col-md-12">
         <form class="form-horizontal" data-ng-submit="create()" novalidate>
             <fieldset>
-                <h3>General</h3>
-                <div class="form-group" ng-class="{ 'has-error': petForm.title.$dirty && petForm.title.$invalid }">
-                    <label class="control-label" for="name">Nombre</label>
-                    <div class="controls">
-                        <input name="name" type="text" data-ng-model="general.name" id="name" class="form-control" placeholder="Nombre" required>
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label class="control-label" for="color">Color</label>
-                    <div class="controls">
-                        <input type="text" name="color" data-ng-model="general.color" id="color" class="form-control" placeholder="Color"></textarea>
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label class="control-label" for="breed">Raza</label>
-                    <div class="controls">
-                        <input type="text" name="breed" data-ng-model="general.breed" id="breed" class="form-control" placeholder="Raza"></textarea>
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label class="control-label" for="dateOfBirth">Fecha de Nacimiento</label>
-                    <div class="controls">
-                        <input type="date" name="dateOfBirth" data-ng-model="general.dateOfBirth" id="dateOfBirth" class="form-control" placeholder=""></textarea>
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label class="control-label" for="general_comments">Comentarios</label>
-                    <div class="controls">
-                        <textarea name="general_comments" data-ng-model="general.comments" id="general_comments" class="form-control" placeholder=""></textarea>
-                    </div>
-                </div>
-                <h3>Información de Contacto</h3>
-                <div class="form-group" ng-class="{ 'has-error': petForm.title.$dirty && petForm.title.$invalid }">
-                    <label class="control-label" for="contactName">Nombre de contacto</label>
-                    <div class="controls">
-                        <input name="contactName" type="text" data-ng-model="contact.contactName" id="contactName" class="form-control" placeholder="Nombre" required>
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label class="control-label" for="primaryNumber">Numero de contacto</label>
-                    <div class="controls">
-                        <input type="text" name="primaryNumber" data-ng-model="contact.primaryNumber" id="primaryNumber" class="form-control" placeholder="Numero"></textarea>
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label class="control-label" for="alternativeNumber1">Numero de contacto alternativo 1</label>
-                    <div class="controls">
-                        <input type="text" name="alternativeNumber1" data-ng-model="contact.alternativeNumber1" id="alternativeNumber1" class="form-control" placeholder="Numero"></textarea>
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label class="control-label" for="alternativeNumber2">Numero de contacto alternativo 2</label>
-                    <div class="controls">
-                        <input type="text" name="alternativeNumber2" data-ng-model="contact.alternativeNumber2" id="alternativeNumber2" class="form-control" placeholder="Numero"></textarea>
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label class="control-label" for="email">Email de contacto</label>
-                    <div class="controls">
-                        <input type="text" name="email" data-ng-model="contact.email" id="email" class="form-control" placeholder="email@email.com"></textarea>
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label class="control-label" for="facebook">Facebook</label>
-                    <div class="controls">
-                        <input type="text" name="facebook" data-ng-model="contact.facebook" id="facebook" class="form-control" placeholder=""></textarea>
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label class="control-label" for="twitter">Twitter</label>
-                    <div class="controls">
-                        <input type="text" name="twitter" data-ng-model="contact.twitter" id="twitter" class="form-control" placeholder=""></textarea>
-                    </div>
-                </div>
-                <h3>Información de Contacto</h3>
-                <div class="form-group">
-                    <label class="control-label" for="vetName">Veterinaria</label>
-                    <div class="controls">
-                        <input type="text" name="vetName" data-ng-model="veterinarian.vetName" id="vetName" class="form-control" placeholder="Nombre"></textarea>
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label class="control-label" for="vetPhone">Numero de la Veterinaria</label>
-                    <div class="controls">
-                        <input type="text" name="vetPhone" data-ng-model="veterinarian.vetPhone" id="vetPhone" class="form-control" placeholder="Numero"></textarea>
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label class="control-label" for="vetAddress">Dir. de la Veterinaria</label>
-                    <div class="controls">
-                        <input type="text" name="vetAddress" data-ng-model="veterinarian.vetAddress" id="vetAddress" class="form-control" placeholder="Numero"></textarea>
-                    </div>
-                </div>
-                <h3>Información Médica</h3>
-                <div class="form-group">
-                    <label class="control-label" for="petSex">Sexo</label>
-                    <div class="controls">
-                        <input type="text" name="petSex" data-ng-model="medical.sex" id="petSex" class="form-control" placeholder=""></textarea>
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label class="control-label" for="petMedications">Medicación</label>
-                    <div class="controls">
-                        <input type="text" name="petMedications" data-ng-model="medical.medications" id="petMedications" class="form-control" placeholder="Numero"></textarea>
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label class="control-label" for="petDietary">Dieta</label>
-                    <div class="controls">
-                        <input type="text" name="petDietary" data-ng-model="medical.dietary" id="petDietary" class="form-control" placeholder="Numero"></textarea>
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label class="control-label" for="petAllergies">Alérgias</label>
-                    <div class="controls">
-                        <input type="text" name="petAllergies" data-ng-model="medical.allergies" id="petAllergies" class="form-control" placeholder="Numero"></textarea>
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label class="control-label" for="petMedicalComments">Commentarios</label>
-                    <div class="controls">
-                        <input type="text" name="petMedicalComments" data-ng-model="medical.comments" id="petMedicalComments" class="form-control" placeholder="Numero"></textarea>
-                    </div>
-                </div>
-                <h3>Vacunación</h3>
-                <div class="form-group">
-                    <label class="control-label" for="petIsRabies">Antirabica</label>
-                    <div class="controls">
-                        <input type="text" name="petIsRabies" data-ng-model="vaccination.rabies" id="petIsRabies" class="form-control" placeholder=""></textarea>
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label class="control-label" for="petRabiesVacDate">Fecha de Vac Antirabica</label>
-                    <div class="controls">
-                        <input type="text" name="petRabiesVacDate" data-ng-model="vaccination.rabiesVaccinationDate" id="petRabiesVacDate" class="form-control" placeholder="Fecha"></textarea>
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label class="control-label" for="petAddtionalVac">Vac. Adicionales</label>
-                    <div class="controls">
-                        <input type="text" name="petAddtionalVac" data-ng-model="vaccination.additionalVaccinations" id="petAddtionalVac" class="form-control" placeholder=""></textarea>
-                    </div>
-                </div>
+                <wizard on-finish="finishedWizard()"> 
+                    <wz-step title="Starting">
+                        <h3>General</h3>
+                        <div class="form-group" ng-class="{ 'has-error': petForm.title.$dirty && petForm.title.$invalid }">
+                            <label class="control-label" for="name">Nombre</label>
+                            <div class="controls">
+                                <input name="name" type="text" data-ng-model="general.name" id="name" class="form-control" placeholder="Nombre" required>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label" for="color">Color</label>
+                            <div class="controls">
+                                <input type="text" name="color" data-ng-model="general.color" id="color" class="form-control" placeholder="Color"></textarea>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label" for="breed">Raza</label>
+                            <div class="controls">
+                                <input type="text" name="breed" data-ng-model="general.breed" id="breed" class="form-control" placeholder="Raza"></textarea>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label" for="dateOfBirth">Fecha de Nacimiento</label>
+                            <div class="controls">
+                                <input type="date" name="dateOfBirth" data-ng-model="general.dateOfBirth" id="dateOfBirth" class="form-control" placeholder=""></textarea>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label" for="general_comments">Comentarios</label>
+                            <div class="controls">
+                                <textarea name="general_comments" data-ng-model="general.comments" id="general_comments" class="form-control" placeholder=""></textarea>
+                            </div>
+                        </div>
+                        <input type="submit" wz-next value="Continue" />
+                    </wz-step>
+                    <wz-step title="Continuing">
+                        <h3>Información de Contacto</h3>
+                        <div class="form-group" ng-class="{ 'has-error': petForm.title.$dirty && petForm.title.$invalid }">
+                            <label class="control-label" for="contactName">Nombre de contacto</label>
+                            <div class="controls">
+                                <input name="contactName" type="text" data-ng-model="contact.contactName" id="contactName" class="form-control" placeholder="Nombre" required>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label" for="primaryNumber">Numero de contacto</label>
+                            <div class="controls">
+                                <input type="text" name="primaryNumber" data-ng-model="contact.primaryNumber" id="primaryNumber" class="form-control" placeholder="Numero"></textarea>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label" for="alternativeNumber1">Numero de contacto alternativo 1</label>
+                            <div class="controls">
+                                <input type="text" name="alternativeNumber1" data-ng-model="contact.alternativeNumber1" id="alternativeNumber1" class="form-control" placeholder="Numero"></textarea>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label" for="alternativeNumber2">Numero de contacto alternativo 2</label>
+                            <div class="controls">
+                                <input type="text" name="alternativeNumber2" data-ng-model="contact.alternativeNumber2" id="alternativeNumber2" class="form-control" placeholder="Numero"></textarea>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label" for="email">Email de contacto</label>
+                            <div class="controls">
+                                <input type="text" name="email" data-ng-model="contact.email" id="email" class="form-control" placeholder="email@email.com"></textarea>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label" for="facebook">Facebook</label>
+                            <div class="controls">
+                                <input type="text" name="facebook" data-ng-model="contact.facebook" id="facebook" class="form-control" placeholder=""></textarea>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label" for="twitter">Twitter</label>
+                            <div class="controls">
+                                <input type="text" name="twitter" data-ng-model="contact.twitter" id="twitter" class="form-control" placeholder=""></textarea>
+                            </div>
+                        </div>
+                        <input type="submit" wz-next value="Go on" />
+                    </wz-step>
+                    <wz-step title="More steps">
+                        <h3>Información de Veterinaria</h3>
+                        <div class="form-group">
+                            <label class="control-label" for="vetName">Veterinaria</label>
+                            <div class="controls">
+                                <input type="text" name="vetName" data-ng-model="veterinarian.vetName" id="vetName" class="form-control" placeholder="Nombre"></textarea>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label" for="vetPhone">Numero de la Veterinaria</label>
+                            <div class="controls">
+                                <input type="text" name="vetPhone" data-ng-model="veterinarian.vetPhone" id="vetPhone" class="form-control" placeholder="Numero"></textarea>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label" for="vetAddress">Dir. de la Veterinaria</label>
+                            <div class="controls">
+                                <input type="text" name="vetAddress" data-ng-model="veterinarian.vetAddress" id="vetAddress" class="form-control" placeholder="Numero"></textarea>
+                            </div>
+                        </div>
+                        <input type="submit" wz-next value="Go on" />
+                    </wz-step>
+                    <wz-step title="More steps">
+                        <h3>Información Médica</h3>
+                        <div class="form-group">
+                            <label class="control-label" for="petSex">Sexo</label>
+                            <div class="controls">
+                                <input type="text" name="petSex" data-ng-model="medical.sex" id="petSex" class="form-control" placeholder=""></textarea>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label" for="petMedications">Medicación</label>
+                            <div class="controls">
+                                <input type="text" name="petMedications" data-ng-model="medical.medications" id="petMedications" class="form-control" placeholder="Numero"></textarea>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label" for="petDietary">Dieta</label>
+                            <div class="controls">
+                                <input type="text" name="petDietary" data-ng-model="medical.dietary" id="petDietary" class="form-control" placeholder="Numero"></textarea>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label" for="petAllergies">Alérgias</label>
+                            <div class="controls">
+                                <input type="text" name="petAllergies" data-ng-model="medical.allergies" id="petAllergies" class="form-control" placeholder="Numero"></textarea>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label" for="petMedicalComments">Commentarios</label>
+                            <div class="controls">
+                                <input type="text" name="petMedicalComments" data-ng-model="medical.comments" id="petMedicalComments" class="form-control" placeholder="Numero"></textarea>
+                            </div>
+                        </div>
+                        <input type="submit" wz-next value="Go on" />
+                    </wz-step>
+                    <wz-step title="More steps">
+                        <h3>Vacunación</h3>
+                        <div class="form-group">
+                            <label class="control-label" for="petIsRabies">Antirabica</label>
+                            <div class="controls">
+                                <input type="text" name="petIsRabies" data-ng-model="vaccination.rabies" id="petIsRabies" class="form-control" placeholder=""></textarea>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label" for="petRabiesVacDate">Fecha de Vac Antirabica</label>
+                            <div class="controls">
+                                <input type="text" name="petRabiesVacDate" data-ng-model="vaccination.rabiesVaccinationDate" id="petRabiesVacDate" class="form-control" placeholder="Fecha"></textarea>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label" for="petAddtionalVac">Vac. Adicionales</label>
+                            <div class="controls">
+                                <input type="text" name="petAddtionalVac" data-ng-model="vaccination.additionalVaccinations" id="petAddtionalVac" class="form-control" placeholder=""></textarea>
+                            </div>
+                        </div>
+                        <input type="submit" wz-next value="Go on" />
+                    </wz-step>
+                    <wz-step title="More steps">
+                        <p>Even more steps!!</p>
+                        <input type="submit" wz-next value="Finish now" />
+                    </wz-step>
+                </wizard>
                 <div class="form-group">
                     <input type="submit" class="btn btn-default">
                 </div>
