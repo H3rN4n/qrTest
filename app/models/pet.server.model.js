@@ -7,25 +7,9 @@ var mongoose = require('mongoose'),
 	Schema = mongoose.Schema;
 
 /**
- * Article Schema
+ * pets Schema
  */
-var PetSchema = new Schema({
-	created: {
-		type: Date,
-		default: Date.now
-	},
-/*	ownwerId: {
-		type: Number,
-		default: '',
-		trim: true,
-		required: 'Owner cannot be blank'
-	},
-	petusername: {
-		type: String,
-		unique: 'testing error message',
-		required: 'Please fill in a username',
-		trim: true
-	},*/
+var PetsSchema = new Schema({
 	general: {
 		name: {
 			type: String,
@@ -67,7 +51,7 @@ var PetSchema = new Schema({
 			type: Number,
 			default: '',
 			trim: true,
-			required: 'Owner cannot be blank'
+			required: 'primaryNumber cannot be blank'
 		},
 		alternateNumber1: {
 			type: Number,
@@ -158,29 +142,14 @@ var PetSchema = new Schema({
 			trim: true
 		}
 	},
+	created: {
+		type: Date,
+		default: Date.now
+	},
 	user: {
 		type: Schema.ObjectId,
 		ref: 'User'
 	}
 });
 
-PetSchema.statics.findUniquePetUsername = function(petusername, suffix, callback) {
-	var _this = this;
-	var possibleUsername = petusername + (suffix || '');
-
-	_this.findOne({
-		petusername: possibleUsername
-	}, function(err, user) {
-		if (!err) {
-			if (!user) {
-				callback(possibleUsername);
-			} else {
-				return _this.findUniqueUsername(petusername, (suffix || 0) + 1, callback);
-			}
-		} else {
-			callback(null);
-		}
-	});
-};
-
-mongoose.model('Pet', PetSchema);
+mongoose.model('Pets', PetsSchema);

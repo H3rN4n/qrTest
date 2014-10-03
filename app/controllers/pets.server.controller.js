@@ -5,76 +5,17 @@
  */
 var mongoose = require('mongoose'),
 	errorHandler = require('./errors'),
-	Pet = mongoose.model('Pet'),
-	qr = require('qr-image'),
+	pets = mongoose.model('pets'),
 	_ = require('lodash');
 
 /**
- * Create a pet
+ * Create a pets
  */
 exports.create = function(req, res) {
-	var pet = new Pet(req.body);
-	pet.user = req.user;
+	var pets = new pets(req.body);
+	pets.user = req.user;
 
-	pet.save(function(err) {
-		if (err) {
-			return res.status(400).send({
-				message: errorHandler.getErrorMessage(err)
-			});
-		} else {
-			res.jsonp(pet);
-		}
-	});
-};
-
-/**
- * Show the current pet
- */
-exports.read = function(req, res) {
-	res.jsonp(req.pet);
-};
-
-/**
- * Update a pet
- */
-exports.update = function(req, res) {
-	var pet = req.pet;
-
-	pet = _.extend(pet, req.body);
-
-	pet.save(function(err) {
-		if (err) {
-			return res.status(400).send({
-				message: errorHandler.getErrorMessage(err)
-			});
-		} else {
-			res.jsonp(pet);
-		}
-	});
-};
-
-/**
- * Delete an pet
- */
-exports.delete = function(req, res) {
-	var pet = req.pet;
-
-	pet.remove(function(err) {
-		if (err) {
-			return res.status(400).send({
-				message: errorHandler.getErrorMessage(err)
-			});
-		} else {
-			res.jsonp(pet);
-		}
-	});
-};
-
-/**
- * List of Pets
- */
-exports.list = function(req, res) {
-	Pet.find().sort('-created').populate('user', 'displayName').exec(function(err, pets) {
+	pets.save(function(err) {
 		if (err) {
 			return res.status(400).send({
 				message: errorHandler.getErrorMessage(err)
@@ -86,31 +27,79 @@ exports.list = function(req, res) {
 };
 
 /**
- * Pet middleware
+ * Show the current pets
  */
-exports.petByID = function(req, res, next, id) {
-	Pet.findById(id).populate('user', 'displayName').exec(function(err, pet) {
+exports.read = function(req, res) {
+	res.jsonp(req.pets);
+};
+
+/**
+ * Update a pets
+ */
+exports.update = function(req, res) {
+	var pets = req.pets ;
+
+	pets = _.extend(pets , req.body);
+
+	pets.save(function(err) {
+		if (err) {
+			return res.status(400).send({
+				message: errorHandler.getErrorMessage(err)
+			});
+		} else {
+			res.jsonp(pets);
+		}
+	});
+};
+
+/**
+ * Delete an pets
+ */
+exports.delete = function(req, res) {
+	var pets = req.pets ;
+
+	pets.remove(function(err) {
+		if (err) {
+			return res.status(400).send({
+				message: errorHandler.getErrorMessage(err)
+			});
+		} else {
+			res.jsonp(pets);
+		}
+	});
+};
+
+/**
+ * List of pets
+ */
+exports.list = function(req, res) { pets.find().sort('-created').populate('user', 'displayName').exec(function(err, pets) {
+		if (err) {
+			return res.status(400).send({
+				message: errorHandler.getErrorMessage(err)
+			});
+		} else {
+			res.jsonp(pets);
+		}
+	});
+};
+
+/**
+ * pets middleware
+ */
+exports.petsByID = function(req, res, next, id) { pets.findById(id).populate('user', 'displayName').exec(function(err, pets) {
 		if (err) return next(err);
-		if (!pet) return next(new Error('Failed to load pet ' + id));
-		req.pet = pet;
+		if (! pets) return next(new Error('Failed to load pets ' + id));
+		req.pets = pets ;
 		next();
 	});
 };
 
 /**
- * Pet authorization middleware
+ * pets authorization middleware
  */
 exports.hasAuthorization = function(req, res, next) {
-	if (req.pet.user.id !== req.user.id) {
-		return res.status(403).send({
-			message: 'User is not authorized'
-		});
+	if (req.pets.user.id !== req.user.id) {
+		return res.status(403).send('User is not authorized');
 	}
 	next();
-};
-
-exports.qr = function(req, res) {
-	var code = qr.image(req.param('url'), { type: 'svg' });
-	res.type('svg');
-	code.pipe(res);
 };

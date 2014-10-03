@@ -6,17 +6,17 @@
 var should = require('should'),
 	mongoose = require('mongoose'),
 	User = mongoose.model('User'),
-	Pets2 = mongoose.model('Pets2');
+	pets = mongoose.model('pets');
 
 /**
  * Globals
  */
-var user, pets2;
+var user, pets;
 
 /**
  * Unit tests
  */
-describe('Pets2 Model Unit Tests:', function() {
+describe('pets Model Unit Tests:', function() {
 	beforeEach(function(done) {
 		user = new User({
 			firstName: 'Full',
@@ -28,8 +28,8 @@ describe('Pets2 Model Unit Tests:', function() {
 		});
 
 		user.save(function() { 
-			pets2 = new Pets2({
-				name: 'Pets2 Name',
+			pets = new pets({
+				name: 'pets Name',
 				user: user
 			});
 
@@ -39,16 +39,16 @@ describe('Pets2 Model Unit Tests:', function() {
 
 	describe('Method Save', function() {
 		it('should be able to save without problems', function(done) {
-			return pets2.save(function(err) {
+			return pets.save(function(err) {
 				should.not.exist(err);
 				done();
 			});
 		});
 
 		it('should be able to show an error when try to save without name', function(done) { 
-			pets2.name = '';
+			pets.name = '';
 
-			return pets2.save(function(err) {
+			return pets.save(function(err) {
 				should.exist(err);
 				done();
 			});
@@ -56,7 +56,7 @@ describe('Pets2 Model Unit Tests:', function() {
 	});
 
 	afterEach(function(done) { 
-		Pets2.remove().exec();
+		pets.remove().exec();
 		User.remove().exec();
 
 		done();

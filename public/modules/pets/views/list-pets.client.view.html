@@ -1,20 +1,19 @@
-<section data-ng-controller="PetsController" data-ng-init="find()">
-	<div class="page-header">
-		<h1>Pets</h1>
-	</div>
-	<div class="list-group">
-		<a data-ng-repeat="pet in pets" data-ng-href="#!/pets/{{pet._id}}" class="list-group-item">
+<section data-ng-controller="petsController" data-ng-init="find()">
+    <div class="page-header">
+        <h1>pets</h1>
+    </div>
+    <div class="list-group">
+        <a data-ng-repeat="pets in pets" data-ng-href="#!/pets/{{pets._id}}" class="list-group-item">
 			<small class="list-group-item-text">
 				Posted on
-				<span data-ng-bind="pet.created | date:'mediumDate'"></span>
+				<span data-ng-bind="pets.created | date:'medium'"></span>
 				by
-				<span data-ng-bind="pet.user.displayName"></span>
+				<span data-ng-bind="pets.user.displayName"></span>
 			</small>
-			<h4 class="list-group-item-heading" data-ng-bind="pet.title"></h4>
-			<p class="list-group-item-text" data-ng-bind="pet.content"></p>
-		</a>
-	</div>
-	<div class="alert alert-warning text-center" data-ng-if="pets.$resolved && !pets.length">
-		No pets yet, why don't you <a href="/#!/pets/create">create one</a>?
-	</div>
+			<h4 class="list-group-item-heading" data-ng-bind="pets.name"></h4>
+        </a>
+    </div>
+    <div class="alert alert-warning text-center" data-ng-hide="!pets.$resolved || pets.length">
+    	No pets yet, why don't you <a href="/#!/pets/create">create one</a>?
+    </div>
 </section>

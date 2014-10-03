@@ -1,14 +1,14 @@
 'use strict';
 
 (function() {
-	// pets Controller Spec
-	describe('pets Controller Tests', function() {
+	// Pets Controller Spec
+	describe('PetsController', function() {
 		// Initialize global variables
-		var petsController,
-		scope,
-		$httpBackend,
-		$stateParams,
-		$location;
+		var PetsController,
+			scope,
+			$httpBackend,
+			$stateParams,
+			$location;
 
 		// The $resource service augments the response object with methods for updating and deleting the resource.
 		// If we were to use the standard toEqual matcher, our tests would fail because the test values would not match
@@ -44,90 +44,97 @@
 			$httpBackend = _$httpBackend_;
 			$location = _$location_;
 
-			// Initialize the pets controller.
-			petsController = $controller('petsController', {
+			// Initialize the Pets controller.
+			PetsController = $controller('PetsController', {
 				$scope: scope
 			});
 		}));
 
-		it('$scope.find() should create an array with at least one pets object fetched from XHR', inject(function(Pets) {
-			// Create sample pets using the pets service
-			var samplepets = new Pets({
-				name: 'New pets'
+		it('$scope.find() should create an array with at least one pet object fetched from XHR', inject(function(Pets) {
+			// Create sample pet using the Pets service
+			var samplePet = new Pets({
+				title: 'An Pet about MEAN',
+				content: 'MEAN rocks!'
 			});
 
-			// Create a sample pets array that includes the new pets
-			samplepets = [samplepets];
+			// Create a sample pets array that includes the new pet
+			var samplePets = [samplePet];
 
 			// Set GET response
-			$httpBackend.expectGET('pets').respond(samplepets);
+			$httpBackend.expectGET('pets').respond(samplePets);
 
 			// Run controller functionality
 			scope.find();
 			$httpBackend.flush();
 
 			// Test scope value
-			expect(scope.pets).toEqualData(samplepets);
+			expect(scope.pets).toEqualData(samplePets);
 		}));
 
-		it('$scope.findOne() should create an array with one pets object fetched from XHR using a petsId URL parameter', inject(function(Pets) {
-			// Define a sample pets object
-			var samplepets = new Pets({
-				name: 'New pets'
+		it('$scope.findOne() should create an array with one pet object fetched from XHR using a petId URL parameter', inject(function(Pets) {
+			// Define a sample pet object
+			var samplePet = new Pets({
+				title: 'An Pet about MEAN',
+				content: 'MEAN rocks!'
 			});
 
 			// Set the URL parameter
-			$stateParams.petsId = '525a8422f6d0f87f0e407a33';
+			$stateParams.petId = '525a8422f6d0f87f0e407a33';
 
 			// Set GET response
-			$httpBackend.expectGET(/pets\/([0-9a-fA-F]{24})$/).respond(samplepets);
+			$httpBackend.expectGET(/pets\/([0-9a-fA-F]{24})$/).respond(samplePet);
 
 			// Run controller functionality
 			scope.findOne();
 			$httpBackend.flush();
 
 			// Test scope value
-			expect(scope.pets).toEqualData(samplepets);
+			expect(scope.pet).toEqualData(samplePet);
 		}));
 
 		it('$scope.create() with valid form data should send a POST request with the form input values and then locate to new object URL', inject(function(Pets) {
-			// Create a sample pets object
-			var samplepetsPostData = new Pets({
-				name: 'New pets'
+			// Create a sample pet object
+			var samplePetPostData = new Pets({
+				title: 'An Pet about MEAN',
+				content: 'MEAN rocks!'
 			});
 
-			// Create a sample pets response
-			var samplepetsResponse = new Pets({
+			// Create a sample pet response
+			var samplePetResponse = new Pets({
 				_id: '525cf20451979dea2c000001',
-				name: 'New pets'
+				title: 'An Pet about MEAN',
+				content: 'MEAN rocks!'
 			});
 
 			// Fixture mock form input values
-			scope.name = 'New pets';
+			scope.title = 'An Pet about MEAN';
+			scope.content = 'MEAN rocks!';
 
 			// Set POST response
-			$httpBackend.expectPOST('pets', samplepetsPostData).respond(samplepetsResponse);
+			$httpBackend.expectPOST('pets', samplePetPostData).respond(samplePetResponse);
 
 			// Run controller functionality
 			scope.create();
 			$httpBackend.flush();
 
 			// Test form inputs are reset
-			expect(scope.name).toEqual('');
+			expect(scope.title).toEqual('');
+			expect(scope.content).toEqual('');
 
-			// Test URL redirection after the pets was created
-			expect($location.path()).toBe('/pets/' + samplepetsResponse._id);
+			// Test URL redirection after the pet was created
+			expect($location.path()).toBe('/pets/' + samplePetResponse._id);
 		}));
 
-		it('$scope.update() should update a valid pets', inject(function(Pets) {
-			// Define a sample pets put data
-			var samplepetsPutData = new Pets({
+		it('$scope.update() should update a valid pet', inject(function(Pets) {
+			// Define a sample pet put data
+			var samplePetPutData = new Pets({
 				_id: '525cf20451979dea2c000001',
-				name: 'New pets'
+				title: 'An Pet about MEAN',
+				content: 'MEAN Rocks!'
 			});
 
-			// Mock pets in scope
-			scope.pets = samplepetsPutData;
+			// Mock pet in scope
+			scope.pet = samplePetPutData;
 
 			// Set PUT response
 			$httpBackend.expectPUT(/pets\/([0-9a-fA-F]{24})$/).respond();
@@ -137,23 +144,23 @@
 			$httpBackend.flush();
 
 			// Test URL location to new object
-			expect($location.path()).toBe('/pets/' + samplepetsPutData._id);
+			expect($location.path()).toBe('/pets/' + samplePetPutData._id);
 		}));
 
-		it('$scope.remove() should send a DELETE request with a valid petsId and remove the pets from the scope', inject(function(Pets) {
-			// Create new pets object
-			var samplepets = new Pets({
+		it('$scope.remove() should send a DELETE request with a valid petId and remove the pet from the scope', inject(function(Pets) {
+			// Create new pet object
+			var samplePet = new Pets({
 				_id: '525a8422f6d0f87f0e407a33'
 			});
 
-			// Create new pets array and include the pets
-			scope.pets = [samplepets];
+			// Create new pets array and include the pet
+			scope.pets = [samplePet];
 
 			// Set expected DELETE response
 			$httpBackend.expectDELETE(/pets\/([0-9a-fA-F]{24})$/).respond(204);
 
 			// Run controller functionality
-			scope.remove(samplepets);
+			scope.remove(samplePet);
 			$httpBackend.flush();
 
 			// Test array after successful delete
