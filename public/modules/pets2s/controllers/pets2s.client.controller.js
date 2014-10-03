@@ -1,7 +1,7 @@
 'use strict';
 
 // Pets2s controller
-angular.module('pets2s').controller('Pets2sController', ['$scope', '$stateParams', '$location', 'Authentication', 'Pets2s', 'mgo-angular-wizard',
+angular.module('pets2s').controller('Pets2sController', ['$scope', '$stateParams', '$location', 'Authentication', 'Pets2s',
 	function($scope, $stateParams, $location, Authentication, Pets2s ) {
 		$scope.authentication = Authentication;
 
