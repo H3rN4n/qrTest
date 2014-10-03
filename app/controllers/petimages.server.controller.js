@@ -5,100 +5,100 @@
  */
 var mongoose = require('mongoose'),
 	errorHandler = require('./errors'),
-	pets = mongoose.model('Pets'),
+	Petimage = mongoose.model('Petimage'),
 	_ = require('lodash');
 
 /**
- * Create a pets
+ * Create a Petimage
  */
 exports.create = function(req, res) {
-	var pets = new pets(req.body);
-	pets.user = req.user;
+	var petimage = new Petimage(req.body);
+	petimage.user = req.user;
 
-	pets.save(function(err) {
+	petimage.save(function(err) {
 		if (err) {
 			return res.status(400).send({
 				message: errorHandler.getErrorMessage(err)
 			});
 		} else {
-			res.jsonp(pets);
+			res.jsonp(petimage);
 		}
 	});
 };
 
 /**
- * Show the current pets
+ * Show the current Petimage
  */
 exports.read = function(req, res) {
-	res.jsonp(req.pets);
+	res.jsonp(req.petimage);
 };
 
 /**
- * Update a pets
+ * Update a Petimage
  */
 exports.update = function(req, res) {
-	var pets = req.pets ;
+	var petimage = req.petimage ;
 
-	pets = _.extend(pets , req.body);
+	petimage = _.extend(petimage , req.body);
 
-	pets.save(function(err) {
+	petimage.save(function(err) {
 		if (err) {
 			return res.status(400).send({
 				message: errorHandler.getErrorMessage(err)
 			});
 		} else {
-			res.jsonp(pets);
+			res.jsonp(petimage);
 		}
 	});
 };
 
 /**
- * Delete an pets
+ * Delete an Petimage
  */
 exports.delete = function(req, res) {
-	var pets = req.pets ;
+	var petimage = req.petimage ;
 
-	pets.remove(function(err) {
+	petimage.remove(function(err) {
 		if (err) {
 			return res.status(400).send({
 				message: errorHandler.getErrorMessage(err)
 			});
 		} else {
-			res.jsonp(pets);
+			res.jsonp(petimage);
 		}
 	});
 };
 
 /**
- * List of pets
+ * List of Petimages
  */
-exports.list = function(req, res) { pets.find().sort('-created').populate('user', 'displayName').exec(function(err, pets) {
+exports.list = function(req, res) { Petimage.find().sort('-created').populate('user', 'displayName').exec(function(err, petimages) {
 		if (err) {
 			return res.status(400).send({
 				message: errorHandler.getErrorMessage(err)
 			});
 		} else {
-			res.jsonp(pets);
+			res.jsonp(petimages);
 		}
 	});
 };
 
 /**
- * pets middleware
+ * Petimage middleware
  */
-exports.petsByID = function(req, res, next, id) { pets.findById(id).populate('user', 'displayName').exec(function(err, pets) {
+exports.petimageByID = function(req, res, next, id) { Petimage.findById(id).populate('user', 'displayName').exec(function(err, petimage) {
 		if (err) return next(err);
-		if (! pets) return next(new Error('Failed to load pets ' + id));
-		req.pets = pets ;
+		if (! petimage) return next(new Error('Failed to load Petimage ' + id));
+		req.petimage = petimage ;
 		next();
 	});
 };
 
 /**
- * pets authorization middleware
+ * Petimage authorization middleware
  */
 exports.hasAuthorization = function(req, res, next) {
-	if (req.pets.user.id !== req.user.id) {
+	if (req.petimage.user.id !== req.user.id) {
 		return res.status(403).send('User is not authorized');
 	}
 	next();
