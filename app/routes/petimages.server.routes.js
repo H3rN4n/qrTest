@@ -9,6 +9,9 @@ module.exports = function(app) {
 		.get(petimages.list)
 		.post(users.requiresLogin, petimages.create);
 
+	app.route('/upload')
+		.post(users.requiresLogin, petimages.upload);
+
 	app.route('/petimages/:petimageId')
 		.get(petimages.read)
 		.put(users.requiresLogin, petimages.hasAuthorization, petimages.update)

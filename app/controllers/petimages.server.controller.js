@@ -10,11 +10,11 @@ var mongoose = require('mongoose'),
     util = require('util'),
     fs   = require('fs-extra'),
     qt   = require('quickthumb'),
+    md5 = require('MD5'),
 	_ = require('lodash');
 
 
 // Use quickthumb
-//app.use(qt.static(__dirname + '/'));
 
 /*app.post('/upload', function (req, res){
   var form = new formidable.IncomingForm();
@@ -42,6 +42,7 @@ var mongoose = require('mongoose'),
   });
 });*/
 exports.upload = function(req, res) {
+
 	var form = new formidable.IncomingForm();
   	form.parse(req, function(err, fields, files) {
 	    res.writeHead(200, {'content-type': 'text/plain'});
@@ -53,9 +54,11 @@ exports.upload = function(req, res) {
 	    /* Temporary location of our uploaded file */
 	    var temp_path = this.openedFiles[0].path;
 	    /* The file name of the uploaded file */
-	    var file_name = this.openedFiles[0].name;
+	    //var file_name = this.openedFiles[0].name;
+	    var time = new Date().getTime();
+	    var file_name =  md5(time) + '.jpg';
 	    /* Location where we want to copy the uploaded file */
-	    var new_location = 'uploads/';
+	    var new_location = 'public/uploads/';
 
 	    fs.copy(temp_path, new_location + file_name, function(err) {  
 	      if (err) {
